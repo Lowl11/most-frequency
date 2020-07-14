@@ -1,21 +1,17 @@
 package main
 
 import (
-	"io/ioutil"
+	"bytes"
 	"most-frequency/text"
-	"strings"
+	"most-frequency/utils"
 )
 
 // Quantity of the most frequently words
 const MostFrequentlyWordsQuantity = 20
 
 func main() {
-	file, err := ioutil.ReadFile("text.txt")
-	if err != nil {
-		panic(err.Error())
-	}
-
-	fileText := string(file)
+	fileName := "text.txt"
+	var fileText text.String = utils.ReadFile(fileName)
 	words := splitWords(fileText)
 
 	textAnalyzer := &text.TextAnalyzer{
@@ -25,12 +21,14 @@ func main() {
 	textAnalyzer.FindMostFrequentlyWords()
 }
 
-func splitWords(text string) []string {
-	var words []string
-	lines := strings.Split(text, "\n")
+func splitWords(fileText text.String) []text.String {
+	var words []text.String
+	space := []byte(" ")
+	lines := bytes.Split(fileText, space)
 	for _, line := range lines {
-		lineWords := strings.Split(line, " ")
-		words = append(words, lineWords...)
+		lineWords := bytes.Split(line, space)
+		stringWords := text.ConvertBytesToString(lineWords)
+		words = text.ConcatenateArrays(words, stringWords)
 	}
 	return words
 }

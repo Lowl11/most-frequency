@@ -1,6 +1,7 @@
 package text
 
 import (
+	"bytes"
 	"fmt"
 	"regexp"
 	"sort"
@@ -8,7 +9,7 @@ import (
 )
 
 type TextAnalyzer struct {
-	Words                       []string
+	Words                       []String
 	MostFrequentlyWordsQuantity int
 }
 
@@ -44,7 +45,7 @@ func (ta *TextAnalyzer) prepareTextWords() {
 }
 
 func (ta *TextAnalyzer) sortWords() {
-	sort.Strings(ta.Words)
+	SortStrings(ta.Words)
 }
 
 func (ta *TextAnalyzer) removeSymbols() {
@@ -61,9 +62,9 @@ func (ta *TextAnalyzer) removeSymbols() {
 func (ta *TextAnalyzer) removeEmptyWords() {
 	out := ta.Words[:0]
 	for _, word := range ta.Words {
-		trimmed := strings.TrimSpace(word)
-		if word != "" {
-			lower := strings.ToLower(trimmed)
+		trimmed := bytes.TrimSpace(word)
+		if len(word) != 0 {
+			lower := bytes.ToLower(trimmed)
 			out = append(out, lower)
 		}
 	}

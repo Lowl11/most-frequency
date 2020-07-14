@@ -1,18 +1,20 @@
 package text
 
-import "sort"
+import (
+	"sort"
+)
 
 type Word struct {
-	Text  string
+	Text  String
 	Count int
 }
 
 type WordsDictionary struct {
-	Words  []string
+	Words  []String
 	Counts []int
 }
 
-func (wd *WordsDictionary) AddWord(word string) {
+func (wd *WordsDictionary) AddWord(word String) {
 	findWord, findWordIndex := wd.GetWordByText(word)
 	if findWord == nil {
 		wd.Words = append(wd.Words, word)
@@ -22,7 +24,7 @@ func (wd *WordsDictionary) AddWord(word string) {
 	}
 }
 
-func (wd *WordsDictionary) GetWordByText(word string) (*Word, int) {
+func (wd *WordsDictionary) GetWordByText(word String) (*Word, int) {
 	wordIndex := sort.SearchStrings(wd.Words, word)
 	if wordIndex == len(wd.Words) {
 		return nil, 0
