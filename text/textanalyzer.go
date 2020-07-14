@@ -22,9 +22,9 @@ func (ta *TextAnalyzer) FindMostFrequentlyWords() {
 	for _, word := range ta.Words {
 		dict.AddWord(word)
 	}
+	sort.Sort(dict)
 
 	mostFrequentWord := make([]Word, 0, ta.MostFrequentlyWordsQuantity)
-	sort.Sort(dict)
 	for i := 0; i < ta.MostFrequentlyWordsQuantity; i++ {
 		mostFrequentWord = append(mostFrequentWord, *dict.GetWordByIndex(i))
 	}

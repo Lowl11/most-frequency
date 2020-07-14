@@ -16,11 +16,21 @@ func main() {
 	}
 
 	fileText := string(file)
-	words := strings.Split(fileText, " ")
+	words := splitWords(fileText)
 
 	textAnalyzer := &text.TextAnalyzer{
 		Words:                       words,
 		MostFrequentlyWordsQuantity: MostFrequentlyWordsQuantity,
 	}
 	textAnalyzer.FindMostFrequentlyWords()
+}
+
+func splitWords(text string) []string {
+	var words []string
+	lines := strings.Split(text, "\n")
+	for _, line := range lines {
+		lineWords := strings.Split(line, " ")
+		words = append(words, lineWords...)
+	}
+	return words
 }
