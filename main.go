@@ -2,6 +2,7 @@ package main
 
 import (
 	"io/ioutil"
+	"most-frequency/text"
 	"strings"
 )
 
@@ -15,9 +16,10 @@ func main() {
 	}
 
 	fileText := string(file)
+	words := strings.Split(fileText, " ")
 
-	textAnalyzer := &TextAnalyzer{
-		Words:                       strings.Split(fileText, " "),
+	textAnalyzer := &text.TextAnalyzer{
+		Words:                       words,
 		MostFrequentlyWordsQuantity: MostFrequentlyWordsQuantity,
 	}
 	textAnalyzer.FindMostFrequentlyWords()
