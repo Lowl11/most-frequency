@@ -38,7 +38,6 @@ func (ta *TextAnalyzer) FindMostFrequentlyWords() {
 // Preparaions before counting the most frequently words
 func (ta *TextAnalyzer) prepareTextWords() {
 	ta.removeEmptyWords()
-	ta.removeSymbols()
 	ta.sortWords()
 }
 
@@ -46,17 +45,13 @@ func (ta *TextAnalyzer) sortWords() {
 	sort.Strings(ta.Words)
 }
 
-func (ta *TextAnalyzer) removeSymbols() {
-	regex, _ := regexp.Compile("[^a-zA-Z]+")
-	for i := 0; i < len(ta.Words); i++ {
-		ta.Words[i] = regex.ReplaceAllString(strings.ToLower(ta.Words[i]), "")
-	}
-}
-
 func (ta *TextAnalyzer) removeEmptyWords() {
 	out := ta.Words[:0]
+	regex, _ := regexp.Compile("[^a-zA-Z]+")
 	for _, word := range ta.Words {
 		if word != "" {
+			preparedWord := strings.ToLower(strings.TrimSpace(word))
+			preparedWord = regex.ReplaceAllString(preparedWord, "")
 			out = append(out, strings.TrimSpace(word))
 		}
 	}
