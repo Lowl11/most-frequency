@@ -48,7 +48,7 @@ func (wd *WordsDictionary) Len() int {
 }
 
 func (wd *WordsDictionary) Less(i, j int) bool {
-	return wd.Counts[i] < wd.Counts[j]
+	return wd.Counts[i] > wd.Counts[j]
 }
 
 func (wd *WordsDictionary) Swap(i, j int) {
