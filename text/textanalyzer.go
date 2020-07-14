@@ -47,12 +47,12 @@ func (ta *TextAnalyzer) sortWords() {
 
 func (ta *TextAnalyzer) removeEmptyWords() {
 	out := ta.Words[:0]
-	regex, _ := regexp.Compile("[^a-zA-Z]+")
+	regex, _ := regexp.Compile("[\\W]+")
 	for _, word := range ta.Words {
 		if word != "" {
 			preparedWord := strings.ToLower(strings.TrimSpace(word))
 			preparedWord = regex.ReplaceAllString(preparedWord, "")
-			out = append(out, strings.TrimSpace(word))
+			out = append(out, preparedWord)
 		}
 	}
 	ta.Words = out
