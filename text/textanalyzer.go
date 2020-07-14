@@ -49,7 +49,7 @@ func (ta *TextAnalyzer) sortWords() {
 func (ta *TextAnalyzer) removeSymbols() {
 	regex, _ := regexp.Compile("[^a-zA-Z]+")
 	for i := 0; i < len(ta.Words); i++ {
-		ta.Words[i] = regex.ReplaceAllString(ta.Words[i], "")
+		ta.Words[i] = regex.ReplaceAllString(strings.ToLower(ta.Words[i]), "")
 	}
 }
 
